@@ -45,7 +45,7 @@ func getTodos(c *gin.Context) {
 func createTodo(c *gin.Context) {
 	var newTodo Todo
 	if err := c.ShouldBindJSON(&newTodo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errora": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
@@ -98,7 +98,7 @@ func deleteTodo(c *gin.Context) {
 
 	result, err1 := tx.Exec("DELETE FROM todo WHERE id = $1;", todoID)
 	if err1 != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errorb": err1.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
 		return
 	}
 
@@ -127,7 +127,7 @@ func updateTodoStatus(c *gin.Context) {
 
 	result, err1 := tx.Exec("UPDATE todo SET complete = CASE WHEN complete = true THEN false ELSE true END WHERE id = $1;", todoID)
 	if err1 != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errorb": err1.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err1.Error()})
 		return
 	}
 
@@ -143,7 +143,7 @@ func updateTodoStatus(c *gin.Context) {
 func modifyTodo(c *gin.Context) {
 	var newTodo Todo
 	if err := c.ShouldBindJSON(&newTodo); err != nil {
-		c.JSON(http.StatusBadRequest, gin.H{"errora": err.Error()})
+		c.JSON(http.StatusBadRequest, gin.H{"error": err.Error()})
 		return
 	}
 
